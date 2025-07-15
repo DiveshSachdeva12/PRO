@@ -1,0 +1,9 @@
+form.card {
+  max-width: 600px;
+  margin: auto;
+}
+
+input:disabled {
+  background-color: #f1f1f1;
+  color: #555;
+}

@@ -1,0 +1,106 @@
+/* Top strip for language and screen reader access */
+.top-strip {
+  background-color: #f8f9fa;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+}
+
+/* Main logo + header */
+.main-header {
+  background-color: white;
+  border-bottom: 2px solid #eee;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nigam{
+    font-size: 1.2rem;
+}
+/* Navigation container */
+.main-nav {
+  background-color: #006699;
+  padding: 14px 0;
+  text-align: center;
+}
+
+/* Wrapper that holds all nav links and centers them */
+.nav-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Each nav link */
+.nav-link {
+  color: white !important;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+  white-space: nowrap; /* Prevent awkward wrapping */
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Hindi name styling */
+.text-secondary {
+  font-size: 24px;
+  color: #444;
+  font-weight: bold;
+  line-height: 1.4;
+  font-family: 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+}
+
+/* === Responsive Breakpoints === */
+@media (max-width: 768px) {
+  .top-strip {
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+  }
+
+  .main-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .main-nav {
+    padding: 10px 0;
+  }
+
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .text-secondary {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-wrapper {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .text-secondary {
+    font-size: 18px;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
