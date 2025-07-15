@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 export default function ComplaintForm() {
-  // Function to generate unique Complaint ID
   const generateId = () => 'C' + Date.now();
 
   const [form, setForm] = useState({
@@ -16,24 +15,22 @@ export default function ComplaintForm() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     let updatedValue = value;
 
     if (name === 'name') {
-      updatedValue = value.toUpperCase(); // auto-uppercase name
+      updatedValue = value.toUpperCase();
     }
 
     if (name === 'phone') {
-      updatedValue = value.replace(/\D/g, ''); // digits only
+      updatedValue = value.replace(/\D/g, '');
     }
 
     setForm((prev) => ({ ...prev, [name]: updatedValue }));
     validateField(name, updatedValue);
   };
 
-  // Validate individual field
   const validateField = (name, value) => {
     let message = '';
 
@@ -50,13 +47,12 @@ export default function ComplaintForm() {
     setErrors((prev) => ({ ...prev, [name]: message }));
   };
 
-  // Validate all fields and submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
     Object.entries(form).forEach(([key, value]) => {
-      if (key === 'complaintId') return; // skip ID field
+      if (key === 'complaintId') return;
       if (!value.trim()) newErrors[key] = 'This field is required';
       if (key === 'phone' && value.length !== 10) newErrors[key] = 'Phone must be 10 digits';
     });
@@ -65,7 +61,9 @@ export default function ComplaintForm() {
     if (Object.keys(newErrors).length > 0) return;
 
     try {
-      await axios.post('/api/complaints', form);
+      const baseURL = import.meta.env.VITE_API_BASE_URL;
+      await axios.post(`${baseURL}/api/complaints`, form); // ✅ Uses deployed backend
+
       setSubmitted(true);
       setForm({
         complaintId: generateId(),
@@ -77,6 +75,7 @@ export default function ComplaintForm() {
       setErrors({});
     } catch (err) {
       alert('Submission failed. Please try again.');
+      console.error(err);
     }
   };
 
@@ -89,7 +88,6 @@ export default function ComplaintForm() {
       )}
 
       <form onSubmit={handleSubmit} className="row g-3 needs-validation" noValidate>
-        {/* Complaint ID (disabled) */}
         <div className="col-md-6">
           <label className="form-label">Complaint ID</label>
           <input
@@ -101,7 +99,6 @@ export default function ComplaintForm() {
           />
         </div>
 
-        {/* Name */}
         <div className="col-md-6">
           <label className="form-label">Full Name</label>
           <input
@@ -115,7 +112,6 @@ export default function ComplaintForm() {
           {errors.name && <div className="invalid-feedback">{errors.name}</div>}
         </div>
 
-        {/* Phone */}
         <div className="col-md-6">
           <label className="form-label">Phone Number</label>
           <input
@@ -130,7 +126,6 @@ export default function ComplaintForm() {
           {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
         </div>
 
-        {/* Address */}
         <div className="col-12">
           <label className="form-label">Address</label>
           <input
@@ -144,7 +139,6 @@ export default function ComplaintForm() {
           {errors.address && <div className="invalid-feedback">{errors.address}</div>}
         </div>
 
-        {/* Complaint Details */}
         <div className="col-12">
           <label className="form-label">Complaint Details</label>
           <textarea
@@ -158,7 +152,6 @@ export default function ComplaintForm() {
           {errors.details && <div className="invalid-feedback">{errors.details}</div>}
         </div>
 
-        {/* Submit */}
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Submit Complaint</button>
         </div>
