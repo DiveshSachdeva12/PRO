@@ -29,8 +29,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className="d-flex align-items-center gap-3">
-          <img src="/https://media.istockphoto.com/id/512185437/photo/indias-flag-close-up.jpg?s=612x612&w=0&k=20&c=ndMmdJY9qsL4f_dJBSDbPjD213GD5s_YcZAJK8z2uTQ=" alt="Indian Flag" height="40" />
-          <img src="/swachh.png" alt="Swachh Bharat" height="50" />
+         
         </div>
       </div>
 
