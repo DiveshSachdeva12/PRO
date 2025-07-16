@@ -1,25 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const Complaint = require('./models/complaint');
+const mongoose = require('mongoose');
 
-router.post('/', async (req, res) => {
-  try {
-    const { complaintId, name, phone, address, details } = req.body;
-
-    const newComplaint = new Complaint({
-      complaintId,
-      name,
-      phone,
-      address,
-      details
-    });
-
-    await newComplaint.save();
-    res.status(200).json({ message: 'Complaint saved successfully' });
-  } catch (err) {
-    console.error('Error saving complaint:', err);
-    res.status(500).json({ error: 'Failed to save complaint' });
-  }
+const complaintSchema = new mongoose.Schema({
+  complaintId: { type: String, required: true },
+  name: { type: String, required: true },
+  phone: { type: String, required: true },
+  address: { type: String, required: true },
+  details: { type: String, required: true },
+}, {
+  timestamps: true
 });
 
-module.exports = router;
+module.exports = mongoose.model('Complaint', complaintSchema);
