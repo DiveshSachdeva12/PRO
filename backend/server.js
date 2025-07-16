@@ -1,23 +1,34 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 
-const complaintRoutes = require('./routes/complaint');
-const staffRoutes = require('./routes/staff');
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/complaints', complaintRoutes);
-app.use('/api/staff', staffRoutes);
+// ✅ Import routes
+const complaintRoutes = require('./routes/complaint');
 
-// ✅ Root route for health check or testing
+// ✅ Use routes
+app.use('/api/complaints', complaintRoutes);
+
+// ✅ Default root route
 app.get('/', (req, res) => {
   res.send('✅ MCD Backend is running!');
 });
 
-// ✅ Use dynamic port for deployment compatibility (e.g., Render)
+// ✅ Connect to MongoDB and Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-    
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('✅ MongoDB connected');
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+}).catch((err) => {
+  console.error('MongoDB connection error:', err);
+});
