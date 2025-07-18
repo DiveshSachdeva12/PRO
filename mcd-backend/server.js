@@ -7,11 +7,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://mcdproject.vercel.app'  
-  ],
-  credentials: true
+  origin: 'https://mcdoffice.vercel.app', // your deployed frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 
 app.use(express.json());
