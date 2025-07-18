@@ -6,14 +6,13 @@ const KiteDistribution = () => {
     aadhar: '',
     name: '',
     address: '',
-    quantity: '', // 👈 Add quantity
+    quantity: '',
   });
 
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if (name === 'name' || name === 'address') {
       setForm({ ...form, [name]: value.toUpperCase() });
     } else {
@@ -35,9 +34,9 @@ const KiteDistribution = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/kites', form);
+      const res = await axios.post('https://mcd-offc-pro.onrender.com/api/kites', form);
       setMessage(res.data.message);
-      setForm({ aadhar: '', name: '', address: '', quantity: '' }); // clear all
+      setForm({ aadhar: '', name: '', address: '', quantity: '' });
     } catch (err) {
       setMessage(err.response?.data?.message || 'Something went wrong');
     }
