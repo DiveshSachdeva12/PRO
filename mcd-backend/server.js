@@ -6,7 +6,14 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://mcdproject.vercel.app'  
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Require routes AFTER app is defined
