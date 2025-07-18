@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import ComplaintForm from './components/ComplaintForm';
 import StaffForm from './components/StaffForm';
+import KiteDistribution from './components/KiteDistribution';
+
 
 export default function App() {
   return (
@@ -12,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/complaints" element={<ComplaintForm />} />
           <Route path="/staff" element={<StaffForm />} />
+          <Route path="/kite-distribution" element={<KiteDistribution />} />
         </Routes>
       </div>
     </>
