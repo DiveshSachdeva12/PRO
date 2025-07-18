@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -6,17 +5,30 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
+
+// ✅ Allow multiple frontend origins
+const allowedOrigins = [
+  'https://municipalcorporation.vercel.app'
+];
+
 app.use(cors({
-  origin: 'https://mcdoffice.vercel.app', // your deployed frontend URL
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
 
 app.use(express.json());
 
-// Require routes AFTER app is defined
+// Routes
 const complaintRoutes = require("./routes/complaintRoutes");
 app.use("/api", complaintRoutes);
+
 const kiteRoutes = require('./routes/kiteRoutes');
 app.use('/api', kiteRoutes);
 
