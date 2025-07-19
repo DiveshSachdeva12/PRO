@@ -35,7 +35,7 @@ const KiteDistribution = () => {
 
     try {
       const res = await axios.post(
-        'https://mcd-offc-pro.onrender.com/api/kites',
+        'https://https://municipalcorporation.onrender.com',
         form
       );
       setMessage(res.data.message);
