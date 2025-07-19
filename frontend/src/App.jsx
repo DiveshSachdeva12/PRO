@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import ComplaintForm from './components/ComplaintForm';
 import StaffForm from './components/StaffForm';
 import KiteDistribution from './components/KiteDistribution';
+import AdminDashboard from "./components/AdminDashboard";  // ✅ adjust path if needed
 
 
 export default function App() {
@@ -15,6 +16,9 @@ export default function App() {
           <Route path="/complaints" element={<ComplaintForm />} />
           <Route path="/staff" element={<StaffForm />} />
           <Route path="/kite-distribution" element={<KiteDistribution />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+
+
         </Routes>
       </div>
     </>

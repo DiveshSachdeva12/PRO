@@ -34,10 +34,14 @@ const KiteDistribution = () => {
     }
 
     try {
-      const res = await axios.post('https://mcd-offc-pro.onrender.com/api/kites', form);
+      const res = await axios.post(
+        'https://mcd-offc-pro.onrender.com/api/kites',
+        form
+      );
       setMessage(res.data.message);
       setForm({ aadhar: '', name: '', address: '', quantity: '' });
     } catch (err) {
+      console.error('Error submitting form:', err.response || err);
       setMessage(err.response?.data?.message || 'Something went wrong');
     }
   };
@@ -83,7 +87,9 @@ const KiteDistribution = () => {
           min="1"
           required
         />
-        <button className="btn btn-primary" type="submit">Submit</button>
+        <button className="btn btn-primary" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

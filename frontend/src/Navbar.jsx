@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import { FaUserShield } from 'react-icons/fa'; // Admin icon
+
 
 export default function Navbar() {
   const navigate = useNavigate();
 
-  // Function to handle password-protected route
-  const handleKiteDistributionClick = (e) => {
-    e.preventDefault(); // prevent default link navigation
-    const password = prompt("Enter admin password to access Kite Distribution:");
-
+  // Handle password-protected Admin route
+  const handleAdminAccess = (e) => {
+    e.preventDefault();
+    const password = prompt("Enter admin password to access Admin Panel:");
     if (password === "admin123") {
-      navigate('/kite-distribution');
+      navigate('/admin');  // ✅ Protected route
     } else {
       alert("Incorrect password. Access denied.");
     }
@@ -29,6 +30,14 @@ export default function Navbar() {
             <option>English</option>
             <option>Hindi</option>
           </select>
+
+          {/* 🔐 Admin Login button with icon */}
+          <button
+            onClick={handleAdminAccess}
+            className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1"
+          >
+            <FaUserShield /> Admin Login
+          </button>
         </div>
       </div>
 
@@ -42,7 +51,6 @@ export default function Navbar() {
             <small className="text-secondary">पंकज लूथरा, निगम पार्षद, वार्ड 216</small>
           </div>
         </div>
-        <div className="d-flex align-items-center gap-3"></div>
       </div>
 
       {/* Navigation */}
@@ -52,8 +60,17 @@ export default function Navbar() {
           <Link to="/about" className="nav-link">ABOUT US</Link>
           <Link to="/complaints" className="nav-link">COMPLAINT</Link>
 
-          {/* Locked Link */}
-          <a href="/kite-distribution" className="nav-link" onClick={handleKiteDistributionClick}>
+
+          {/* Password-protected kite link */}
+          <a href="/kite-distribution" className="nav-link" onClick={(e) => {
+            e.preventDefault();
+            const password = prompt("Enter admin password to access Kite Distribution:");
+            if (password === "admin123") {
+              navigate('/kite-distribution');
+            } else {
+              alert("Incorrect password. Access denied.");
+            }
+          }}>
             KITE DISTRIBUTION 🔒
           </a>
         </div>
