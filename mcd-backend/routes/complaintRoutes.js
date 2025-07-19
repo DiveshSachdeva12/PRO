@@ -1,11 +1,8 @@
+// routes/complaintRoutes.js
 const express = require("express");
 const router = express.Router();
-const { submitComplaint, getAllComplaints } = require("../controllers/complaintController");
+const { submitComplaint } = require("../controllers/complaintController");
 
-// POST: /api/complaints
-router.post("/", submitComplaint);
-
-// GET: /api/complaints/all
-router.get("/all", getAllComplaints);
+router.post("/complaints", submitComplaint);
 
 module.exports = router;
